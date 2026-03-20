@@ -244,8 +244,10 @@ def lstm_model(units=200, filter_size=64,
             # lru_block.build(input_shape=x.shape)
             x_next = lru_block(x)
         else:
-            x_next = Bidirectional(LSTM(units, return_sequences=True), 
-                    name=f'biLSTM_{i+1}')(x)
+            x_next = Bidirectional(
+            LSTM(units, return_sequences=True, recurrent_dropout=0.1),
+            name=f'biLSTM_{i+1}'
+        )(x)
         if dropout_rate:
             x_next = Dropout(dropout_rate, name=f'dropout_{i+1}')(x_next)
             x = LayerNormalization(name=f'layer_normalization_lstm{i+1}')(x_next + x)
@@ -262,8 +264,10 @@ def lstm_model(units=200, filter_size=64,
         mask = Dense(1, activation='sigmoid', name='mask')(x)
         mask = tf.greater(mask[:, :, 0], 0.5)
         for i in range(2):
-            x = Bidirectional(LSTM(units, return_sequences=True), 
-                name=f'biLSTM_mask_{i+1}')(inputs=x, mask=mask)
+            x = Bidirectional(
+            LSTM(units, return_sequences=True, recurrent_dropout=0.1),
+            name=f'biLSTM_mask_{i+1}'
+        )(inputs=x, mask=mask)
        
     if residual_conv:
         x = Dense(pool_size * 30, activation='relu', name='dense')(x)
