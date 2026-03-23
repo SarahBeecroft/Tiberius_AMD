@@ -245,7 +245,7 @@ def lstm_model(units=200, filter_size=64,
             x_next = lru_block(x)
         else:
             x_next = Bidirectional(
-            LSTM(units, return_sequences=True, recurrent_dropout=0.1),
+            LSTM(units, return_sequences=True, recurrent_dropout=0.00000001),
             name=f'biLSTM_{i+1}'
         )(x)
         if dropout_rate:
@@ -265,7 +265,7 @@ def lstm_model(units=200, filter_size=64,
         mask = tf.greater(mask[:, :, 0], 0.5)
         for i in range(2):
             x = Bidirectional(
-            LSTM(units, return_sequences=True, recurrent_dropout=0.1),
+            LSTM(units, return_sequences=True, recurrent_dropout=0.00000001),
             name=f'biLSTM_mask_{i+1}'
         )(inputs=x, mask=mask)
        
