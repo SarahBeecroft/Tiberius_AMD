@@ -71,7 +71,6 @@ RUN pip install \
 
 
 COPY vendor /opt
-
 WORKDIR /opt
 
 RUN cd Augustus && \
@@ -93,3 +92,6 @@ RUN cd EvidencePipeline/EvidencePipeline/scripts && \
 RUN cd miniprot-boundary-scorer && make
 
 ENV PATH=/usr/local/bin/:${PATH}:/opt/Augustus/bin/:/opt/Tiberius/tiberius/:/opt/Tiberius/:/opt/EvidencePipeline/EvidencePipeline/scripts/:/opt/TransDecoder/util:/opt/miniprothint:/opt/miniprot-boundary-scorer:/opt/hisat2-2.2.1/:/opt/stringtie-3.0.3.Linux_x86_64:/opt/sratoolkit.3.3.0-ubuntu64/bin/
+
+RUN mkdir -p /opt/docker-recipes/
+COPY Dockerfile.amd /opt/docker-recipes/
