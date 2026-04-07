@@ -1,5 +1,18 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/larsgabriel23/tiberius)
 
+## Building the AMD compatible container
+### Quick Start Guide
+```bash
+git clone https://github.com/SarahBeecroft/Tiberius_AMD
+cd Tiberius_AMD
+# Pre-download key repos and files
+bash preinstall.sh
+sudo docker build . -t tiberius_AMD
+
+
+
+
+
 ### ⚠️ Important Update — February 2026
 #### Tiberius models for many new clades are now available!
 
