@@ -41,23 +41,6 @@ fetch_tar() {
     rm -f "$archive"
 }
 
-fetch_tar_to() {
-    local url="$1"
-    local dir="$2"
-    local archive="$(basename "$url")"
-
-    if [ -d "$dir" ] && [ -n "$(ls -A "$dir" 2>/dev/null)" ]; then
-        echo "SKIP  $dir (already exists)"
-        return
-    fi
-
-    echo "FETCH $url"
-    mkdir -p "$dir"
-    wget -q "$url" -O "$archive"
-    tar xf "$archive" -C "$dir" --strip-components=1
-    rm -f "$archive"
-}
-
 fetch_zip() {
     local url="$1"
     local dir="$2"
@@ -91,7 +74,6 @@ fetch_binary() {
 # ── git repos ────────────────────────────────────────────────────────────────
 
 clone_repo https://github.com/Gaius-Augustus/Augustus
-clone_repo https://github.com/Gaius-Augustus/Tiberius
 clone_repo https://github.com/LarsGab/EvidencePipeline
 clone_repo https://github.com/TransDecoder/TransDecoder
 clone_repo https://github.com/tomasbruna/miniprothint
@@ -99,9 +81,6 @@ clone_repo https://github.com/lh3/miniprot
 clone_repo https://github.com/tomasbruna/miniprot-boundary-scorer
 
 # ── prebuilt binaries / archives ─────────────────────────────────────────────
-
-fetch_tar_to "https://bioinf.uni-greifswald.de/bioinf/tiberius/models/tiberius_weights_v2.tar.gz" \
-             "Tiberius/model_weights/tiberius_weights_v2"
            
 fetch_zip  "https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download" \
            "hisat2-2.2.1"

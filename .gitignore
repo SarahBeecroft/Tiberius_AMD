@@ -1,5 +1,6 @@
 slurm/
 train.sh
+vendor/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

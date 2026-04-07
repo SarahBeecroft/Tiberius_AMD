@@ -48,7 +48,7 @@ RUN apt-get update --quiet && \
     apt-get autoremove -y && \
     apt-get clean
 
-    # Install cpanm + Perl modules (URI includes URI::Escape)
+# Install cpanm + Perl modules (URI includes URI::Escape)
 RUN curl -fsSL https://cpanmin.us | perl - App::cpanminus && \
     cpanm --notest DB_File && \
     cpanm --notest URI
@@ -71,6 +71,7 @@ RUN pip install \
 
 
 COPY vendor /opt
+COPY Tiberius /opt/Tiberius
 WORKDIR /opt
 
 RUN cd Augustus && \

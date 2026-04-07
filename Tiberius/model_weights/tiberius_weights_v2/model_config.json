@@ -1,0 +1,19 @@
+{
+  "units": 372,
+  "filter_size": 128,
+  "kernel_size": 9,
+  "numb_conv": 3,
+  "numb_lstm": 2,
+  "dropout_rate": 0.0,
+  "pool_size": 9,
+  "stride": 0,
+  "lstm_mask": false,
+  "output_size": 15,
+  "multi_loss": false,
+  "residual_conv": true,
+  "clamsa": false,
+  "clamsa_kernel": 6,
+  "lru_layer": false,
+  "inp_size": 6,
+  "hmm": false
+}
