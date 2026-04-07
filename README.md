@@ -1,14 +1,44 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/larsgabriel23/tiberius)
 
-## Building the AMD compatible container
-### Quick Start Guide
+## Quick Start Guide to Running Tiberius_AMD on Pawsey's Setonix
+```bash
+cd $MYSCRATCH
+
+# Load Singularity module to pull the container
+module load singularity/3.11.4-nompi
+
+# Pull the container
+singularity pull docker://quay.io/sarahbeecroft9/tiberius:latest
+
+# Grab a GPU in an interactive session to test the container
+salloc --time 1:00:00 --account ${PAWSEY_PROJECT}-gpu --gres=gpu:1 --gpus-per-task=1 --partition gpu
+
+# Need to reload the singularity module for the interactive session
+module load singularity/3.11.4-nompi
+
+# Example command
+singularity exec tiber.sif tiberius \
+  --genome $MYSCRATCH/Tiberius/test_data/Panthera_pardus/inp/genome.fa \
+  --model_cfg mammalia_softmasking_v2 \
+  --out test.gtf \
+  --batch_size 32 \
+  --seq_len 259992
+```
+Important notes:
+- The `batch_size 32` and `seq_len 259992` make the best use of the GPU memory, and provide a 32% speedup compared to the default settings.
+- Each Tiberius process can only use one GPU at a time, so you want to always set `--gres=gpu:1 --gpus-per-task=1`. To be very specific, Tiberius is actually using one GCD per GPU.
+
+### Building the AMD compatible container
+In most cases, you will not need to build the container yourself as it is available on Quay.io already. 
+
+These instructions assume you have access to Docker with sudo privleges. 
 ```bash
 git clone https://github.com/SarahBeecroft/Tiberius_AMD
 cd Tiberius_AMD
-# Pre-download key repos and files
+# Pre-download key repos and files. This will download to Tiberius_AMD/vendor, which will be copied to /opt in the container
 bash preinstall.sh
 sudo docker build . -t tiberius_AMD
-
+```
 
 
 
