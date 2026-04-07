@@ -1,5 +1,9 @@
 FROM quay.io/pawsey/rocm-mpich-base:rocm6.3.0-mpich3.4.3-ubuntu24.04
 
+LABEL org.opencontainers.image.authors="Sarah Beecroft <Sarah.Beecroft@csiro.au"
+LABEL org.opencontainers.image.name="Tiberius_AMD"
+LABEL org.opencontainers.image.branch="rocm6.3.0-mpich3.4.3-ubuntu24.04"
+
 # ROCm environment
 ENV ROCM_RELEASE 6.3.0
 ENV ROCM_PATH /opt/rocm-$ROCM_RELEASE
