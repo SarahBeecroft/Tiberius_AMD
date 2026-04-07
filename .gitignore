@@ -1,6 +1,8 @@
 slurm/
 train.sh
 vendor/
+*.sif
+tiber.tar
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
